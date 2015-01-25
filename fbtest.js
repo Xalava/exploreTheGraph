@@ -44,6 +44,7 @@ FB.getLoginStatus(function(response) {
     'Thanks for logging in, ' + response.name + '!';
 
     var strInfos="";
+
     strInfos +="<b>Name</b> : "+response.name+"<br>";
 	strInfos +="<b>Link: </b>"+response.link+"<br>";
 	strInfos +="<b>Username:</b> "+response.username+"<br>";
@@ -51,7 +52,27 @@ FB.getLoginStatus(function(response) {
 	strInfos +="<b>Email:</b> "+response.email+"<br>";
 
     document.getElementById('infosMax').innerHTML = strInfos;
+    getPhoto();
     });
+  }
+
+   function getPhoto() {
+   	console.log('getting picture');
+   	FB.api('/me/picture', 
+   		{
+        "redirect": false,
+        "height": "100",
+        "type": "normal",
+        "width": "100"
+    	},
+
+   		function(response) {
+   		if(response && !response.error){
+   			console.log('got picture');
+   			document.getElementById('ppicture').innerHTML = "<img src=\"" + response.data.url + "\"/>";
+
+   		}
+   	});
    }
 
     function oneEvent(EventID) {
