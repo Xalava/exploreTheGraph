@@ -1,0 +1,25 @@
+body {
+	font-family: verdana, arial;
+}
+.container{
+/*	background-color: #EEE;
+*/
+	padding:5px;
+	border-radius:10px;
+}
+
+.infobox{
+	border-style:solid;
+    border-width: 1px;
+	margin:10px;
+	padding:20px;
+	overflow: hidden;
+	background-color: #EEE;
+}
+
+.infobox h3{
+	margin:0px;
+	
+
+
+}
