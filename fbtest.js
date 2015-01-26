@@ -9,6 +9,7 @@ function statusChangeCallback(response) {
 	if (response.status === 'connected') {
 	  // Logged into your app and Facebook.
 	  testAPI();
+	  getUserInfo();
 	  oneEvent('/857296087642658');
 	  allAttendingEvents();
 	} else if (response.status === 'not_authorized') {
@@ -42,6 +43,12 @@ FB.getLoginStatus(function(response) {
 
     document.getElementById('status').innerHTML =
     'Thanks for logging in, ' + response.name + '!';
+	});
+}
+
+  function getUserInfo() {
+    console.log('getting User info');
+    FB.api('/me', function(response) {
 
     var strInfos="";
 
@@ -50,6 +57,7 @@ FB.getLoginStatus(function(response) {
 	strInfos +="<b>Username:</b> "+response.username+"<br>";
 	strInfos +="<b>id: </b>"+response.id+"<br>";
 	strInfos +="<b>Email:</b> "+response.email+"<br>";
+	strInfos +="<input type='button' value='Logout' onclick='Logout();'/><br>";
 
     document.getElementById('infosMax').innerHTML = strInfos;
     getPhoto();
@@ -110,68 +118,12 @@ FB.getLoginStatus(function(response) {
 
 		    	};
 		    	
-		    // strEvent +="<b>Name: </b>"+ response.name+"<br>";
-	   	 //    strEvent +="<b>Id: </b>"+ response.id+"<br>";
-	   	 //    strEvent +="<b>Owner: </b>"+ response.owner.name+"<br>";
-	   	 //    strEvent +="<b>Privacy: </b>"+ response.privacy+"<br>";
-
-
 		    	document.getElementById('attendingEvents').innerHTML = strEvent;
 		    }
 	    });	
 
 
    	}
-
-    //   FB.Event.subscribe('auth.authResponseChange', function(response)
-  //   {
-  //    if (response.status === 'connected')
-  //   {
-  //       document.getElementById("message").innerHTML +=  "<br>Connected to Facebook";
-  //       //SUCCESS
- 
-  //   }   
-  //   else if (response.status === 'not_authorized')
-  //   {
-  //       document.getElementById("message").innerHTML +=  "<br>Failed to Connect";
- 
-  //       //FAILED
-  //   } else
-  //   {
-  //       document.getElementById("message").innerHTML +=  "<br>Logged Out";
- 
-  //       //UNKNOWN ERROR
-  //   }
-  //   });
- 
-  //   };
- 
-
- 
-  // function getUserInfo() {
-  //       FB.api('/me', function(response) {
- 
-  //     var str="<b>Name</b> : "+response.name+"<br>";
-  //         str +="<b>Link: </b>"+response.link+"<br>";
-  //         str +="<b>Username:</b> "+response.username+"<br>";
-  //         str +="<b>id: </b>"+response.id+"<br>";
-  //         str +="<b>Email:</b> "+response.email+"<br>";
-  //         str +="<input type='button' value='Get Photo' onclick='getPhoto();'/>";
-  //         str +="<input type='button' value='Logout' onclick='Logout();'/>";
-  //         document.getElementById("status").innerHTML=str;
- 
-  //   });
-  //   }
-  //   function getPhoto()
-  //   {
-  //     FB.api('/me/picture?type=normal', function(response) {
- 
-  //         var str="<br/><b>Pic</b> : <img src='"+response.data.url+"'/>";
-  //         document.getElementById("status").innerHTML+=str;
- 
-  //   });
- 
-  //   }
 
     function Logout()
     {
